@@ -1,0 +1,16 @@
+body {
+	background-color: #000;
+}
+
+#gameArea {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+#canvas1 {
+	background-image: url("night_sky.jpg");
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+}
