@@ -14,4 +14,4 @@ Controls
 * up-arrow/tap               Stay in the air in a stupendous parabolic roller-coaster ride.
 * left-arrow / swipe-left    Dodge to the left.
 * right-arrow / swipe-right  Dodge to the right.
-* down-arrow / swipe-down    --Shit-- Shoot pressies out yer rear!
+* down-arrow / swipe-down    ~~Shit~~ Shoot pressies out yer rear!
