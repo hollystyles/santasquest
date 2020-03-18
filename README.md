@@ -5,7 +5,7 @@ Javascript game inspired by Christmas.
 
 ![Screenshot](screenshot-1.png)
 
-Using same architecture as Phat Parrot this game adds scaling and touch controls to work on all devices with a browser.
+Using same architecture as [Phat Parrot](https://github.com/hollystyles/PhatParrot "Phat Parrot") this game adds scaling and touch controls to work on all devices with a browser.
 
 The aim of the game is to deliver as many presents down the chimneys as you fly over them as possible, without getting hit by pesky concrete snowflakes the size of Mars, augering into the ground or smashing into the chimneys themselves. Santa, Rudolph and their sleigh have a healthy attraction to the ground, via gravity and their not inconsiderable mass, that must be constantly averted by energetic mashing of the up arrow key or frantic tapping till your phone screen cracks!
 
