@@ -347,7 +347,7 @@ function Targets(game){
 	function reset(targets, game){
 		targets.vx = 0;
 		for(var i = 0; i < NUM_TARGETS; i++){
-			var target = targets[i];
+			var target = targets.targetArray[i];
 			target.x = game.ctx.canvas.width + (i * (targets.w + TARGET_INTERVAL));
 		}
 	}
@@ -521,52 +521,78 @@ function InfoScreen(game){
 
 function GameEndBoard(game){
 	
+	this.highScores = [{"name":"Novice Elf", "score":10}, {"name":"Senior Elf", "score":50}, {"name":"Lead Elf", "score":150}, {"name":"Rudolph", "score":500}, {"name":"Santa Clause", "score":1000}]
+
 	init(this, game);
 	
 	this.update = function(game){
-	
-	};
-	
-	this.draw = function(game){
-		
+
 		var sprite = game.assets[0];
-		
+		var modalDialog = document.querySelector('.modal');
+
 		if(sprite.dead){
-			game.ctx.rect(this.x, this.y, this.w, this.h);
-			game.ctx.fillStyle = '#CCC';
-			game.ctx.fill();
-			
-			game.ctx.font = '36px arial';
-			game.ctx.strokeStyle = '#000';
-			game.ctx.fillStyle = '#F00';
-			game.ctx.textBaseline = "top";
-			var text = "Game Over";
-			var width = game.ctx.measureText(text).width;
-			
-			game.ctx.fillText(text, this.x + ((this.w - width) / 2), this.y + 10);
-			game.ctx.strokeText(text, this.x + ((this.w - width) / 2), this.y + 10);	
+			if(modalDialog.style.display == 'none'){
+
+				var stats = game.assets[3];
+				
+				var p1 = this.highScores.find(function(item){
+					return item.name == 'Player 1';
+				});
+				
+				if(p1 == undefined) {
+					this.highScores.push({"name":"Player 1", "score":stats.score});
+				} else {
+					p1.score = stats.score;
+				}
+
+				bindHighscores(this.highScores);
+				
+				modalDialog.style.display = 'block';
+			}
+		}else{
+			if(modalDialog.style.display == 'block'){
+				modalDialog.style.display = 'none';
+			}
 		}
 	};
 	
-	this.receiveKey = function(game){
-		
+	this.draw = function(game){
+	};
+	
+	this.receiveKey = function(game){		
 	};
 	
 	this.rescale = function(game){
-		scale(this, game);
 	};
 	
 	function init(board, game){
-		scale(board, game);
+		document.querySelector('.modal').style.display = 'none';
 	}
 	
-	function scale(board, game){	
-		board.ws = 0.7;
-		board.hs = 0.7;
-		board.w = game.ctx.canvas.width * board.ws;
-		board.h = game.ctx.canvas.height * board.hs;
-		board.x = ((game.ctx.canvas.width - board.w) / 2);
-		board.y = ((game.ctx.canvas.height - board.h) / 2);
+	function scale(board, game){		
+	}
+
+	function bindHighscores(highscores){
+		var curTBody = document.querySelector('.highscores tbody');
+		var newTBody = document.createElement('tbody');
+
+		highscores.sort(function(s1, s2){return s2.score - s1.score;}).forEach(function(item){
+			var row = document.createElement('tr');
+			if(item.name == 'Player 1'){
+				row.className = 'green';
+			}
+			var cell1 = document.createElement('td');
+			var name = document.createTextNode(item.name);
+			cell1.appendChild(name);
+			row.appendChild(cell1);
+			var cell2 = document.createElement('td');
+			var score = document.createTextNode(item.score);
+			cell2.appendChild(score);
+			row.appendChild(cell2);
+			newTBody.appendChild(row);
+		});
+
+		curTBody.parentNode.replaceChild(newTBody, curTBody);
 	}
 }
 
